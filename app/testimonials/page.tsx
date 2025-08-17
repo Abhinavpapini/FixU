@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import WhyChooseUsSection from '../components/WhyChooseUsSection';
 import ComparisonTable from '../components/ComparisonSection';
 import Wcs from "../components/wcs"
-import ServiceForm from "../components/ServiceForm"
+import ServiceFormWrapper from "../components/ServiceFormWrapper"
 // Define types for testimonials
 interface Testimonial {
   id: number;
@@ -237,7 +237,7 @@ const TestimonialsPage: React.FC = () => {
       <WhyChooseUsSection/>
       <ComparisonTable/>
       <Wcs/>
-      <ServiceForm/>
+      <ServiceFormWrapper/>
     </div>
   );
 };

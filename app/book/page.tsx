@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect } from 'react';
-import ServiceForm from "../components/ServiceForm";
+import ServiceFormWrapper from "../components/ServiceFormWrapper";
 import { useServices } from "../../contexts/ServicesContext";
 
 const Book: React.FC = () => {
@@ -12,7 +12,7 @@ const Book: React.FC = () => {
   }, []);
   
   return (
-    <ServiceForm />
+    <ServiceFormWrapper />
   );
 }
 

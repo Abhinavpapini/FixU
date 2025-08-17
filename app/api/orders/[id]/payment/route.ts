@@ -5,7 +5,7 @@ import User from '@/models/User';
 
 export async function PUT(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);

@@ -1,8 +1,9 @@
 "use client"
-import ServiceForm from "../components/ServiceForm"
+import React from 'react'
+import ServiceFormWrapper from "../components/ServiceFormWrapper"
 const page = () => {
   return (
-    <ServiceForm/>
+    <ServiceFormWrapper/>
   )
 }
 

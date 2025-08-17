@@ -6,7 +6,7 @@ import Service from '@/models/Service';
 // Get a specific service
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -48,7 +48,7 @@ export async function GET(
 // Update a service
 export async function PUT(
   request: NextRequest, 
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -108,7 +108,7 @@ export async function PUT(
 // Delete a service
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -144,7 +144,7 @@ export async function DELETE(
 // Toggle service status
 export async function PATCH(
   request: NextRequest,
-  context: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);

@@ -7,7 +7,7 @@ import User from '@/models/User';
 // Update an order
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -16,12 +16,15 @@ export async function PUT(
     }
 
     const payload = await verifyToken(token);
-    if (!payload || !payload.isAdmin) {
+    if (!payload || typeof payload === 'string' || !payload.isAdmin) {
       return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
     }
 
     const orderData = await request.json();
     await connectDB();
+
+    // Get params properly by awaiting them
+    const params = await context.params;
 
     // Find the user with this order
     const user = await User.findOne({ 'orders._id': params.id });

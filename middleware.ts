@@ -20,6 +20,11 @@ export async function middleware(request: NextRequest) {
       // Verify the token
       const payload = await verifyToken(authToken);
       
+      if (!payload || typeof payload === 'string') {
+        // Invalid token, redirect to login
+        return NextResponse.redirect(new URL(`/login?from=${path}`, request.url));
+      }
+      
       // Check if the user is an admin
       if (!payload.isAdmin) {
         // User is not an admin, redirect to home

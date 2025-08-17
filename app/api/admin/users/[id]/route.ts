@@ -142,7 +142,7 @@ import User from '@/models/User';
 // Get a specific user
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -156,6 +156,9 @@ export async function GET(
     }
 
     await connectDB();
+
+    // Get params properly by awaiting them
+    const params = await context.params;
 
     const user = await User.findById(params.id).select('name email phone isAdmin createdAt') as {
       _id: mongoose.Types.ObjectId,
@@ -189,7 +192,7 @@ export async function GET(
 // Update a user
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -205,6 +208,9 @@ export async function PUT(
     const { name, email, password, phone, isAdmin } = await request.json();
 
     await connectDB();
+
+    // Get params properly by awaiting them
+    const params = await context.params;
 
     const user = await User.findById(params.id);
     if (!user) {
@@ -240,7 +246,7 @@ export async function PUT(
 // Delete a user
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const token = getTokenFromRequest(request);
@@ -254,6 +260,9 @@ export async function DELETE(
     }
 
     await connectDB();
+
+    // Get params properly by awaiting them
+    const params = await context.params;
 
     if (params.id === payload.userId) {
       return NextResponse.json({ error: 'Cannot delete your own account' }, { status: 400 });
